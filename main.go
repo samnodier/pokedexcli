@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
+	c := &Config{
+		Next: "https://pokeapi.co/api/v2/location-area",
+	}
 	commands := getCommands()
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -28,7 +31,7 @@ func main() {
 			fmt.Println("Unknown command")
 			continue
 		} else {
-			if err := command.callback(); err != nil {
+			if err := command.callback(c); err != nil {
 				fmt.Printf("Error encountered: %v", err)
 			}
 		}
