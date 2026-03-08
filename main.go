@@ -11,8 +11,9 @@ import (
 func main() {
 	cache := pokecache.NewCache(5 * time.Minute)
 	c := &Config{
-		Next:  "https://pokeapi.co/api/v2/location-area",
-		cache: cache,
+		Next:    "https://pokeapi.co/api/v2/location-area",
+		cache:   cache,
+		Pokedex: make(map[string]Pokemon),
 	}
 	commands := getCommands()
 
@@ -37,7 +38,7 @@ func main() {
 			continue
 		} else {
 			if err := cmd.callback(c, args...); err != nil {
-				fmt.Printf("Error encountered: %v", err)
+				fmt.Printf("Error encountered: %v\n", err)
 			}
 		}
 	}
